@@ -1,9 +1,14 @@
-# This file fetches images using mapbox api, to both train and test sets.
+"""
+I'm using MapBox for this, since it comes in handy for fetchin about
+50k images per month and since my data-set has an overall count of below 25k.
+THis is found to be more suitable.
+This file fetches images using mapbox api, to both train and test sets.
+"""
 
 import pandas as pd
 import requests
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # to prevent the misusage of api key provided by mapbox
 from concurrent.futures import ThreadPoolExecutor  # Forparallel downloads, speedup.
 
 # ================= CONFIGURATION =================
@@ -15,7 +20,9 @@ if not MAPBOX_TOKEN:
     raise ValueError("MapBox key error, check you .env file!.")
 
 # File Setup
-IMAGE_FOLDER = "data/images"
+IMAGE_FOLDER = (
+    "data/images"  # Choosing the folder as .\data\images to store the downloads.
+)
 # INPUT_FILE variable removed because we now pass it into the function directly. # <<< MODIFIED
 
 # Image Settings
@@ -28,6 +35,8 @@ STYLE = "mapbox/satellite-v9"
 Since each image takes about 100 KB.
 22k files store about nearly ~ 2.2 GB.
 (Number of rows btw)
+
+Total size of images is 2.3 GB (approx)
 """
 
 
@@ -55,7 +64,9 @@ def download_image(row):
                 f.write(response.content)
             return None  # Success
         else:
-            return f"Error {response.status_code} on ID {prop_id}"
+            return (
+                f"Error {response.status_code} on ID {prop_id}"  # Proper Error throw.
+            )
 
     except Exception as e:
         return f"Failed ID {row.get('id', 'Unknown')}: {e}"
