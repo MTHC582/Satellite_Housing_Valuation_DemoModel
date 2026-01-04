@@ -12,3 +12,6 @@ __pycache__/
 # Ignore Environment Variables (Security)
 .env
 .DS_Store
+
+# notes to keep on track
+notes.txt
