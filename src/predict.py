@@ -34,7 +34,9 @@ model = ValuationModel().to(DEVICE)
 
 # Check if the file exists before loading
 if os.path.exists("best_model.pth"):
-    model.load_state_dict(torch.load("best_model.pth", map_location=DEVICE))
+    model.load_state_dict(
+        torch.load("best_model.pth", map_location=DEVICE, weights_only=True)
+    )
     print("Model weights loaded successfully!")
 else:
     print("ERROR: 'best_model.pth' not found. Did you run train.py?")
@@ -65,6 +67,6 @@ with torch.no_grad():
         pred_price = prediction.item()
         error = abs(actual_price - pred_price)
 
-        print(f"${actual_price:,.0f:<14} | ${pred_price:,.0f:<14} | ${error:,.0f}")
+        print(f"${actual_price:<14,.0f} | ${pred_price:<14,.0f} | ${error:,.0f}")
 
 print("\nDone!")
