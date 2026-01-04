@@ -1,0 +1,14 @@
+# Ignore Data (Too large for GitHub)
+data/
+*.xlsx
+*.csv
+*.jpg
+*.png
+
+# Ignore Virtual Environment (System specific)
+venv/
+__pycache__/
+
+# Ignore Environment Variables (Security)
+.env
+.DS_Store
