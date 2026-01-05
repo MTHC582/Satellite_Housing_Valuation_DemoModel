@@ -14,8 +14,7 @@ from torchvision import transforms
 from tqdm import tqdm  # To implement a user view Progress bar.
 import matplotlib.pyplot as plt
 
-# One can import your custom modules
-# (Since we are in the same folder, simple imports work)
+# One can import your custom modules, So am I.
 from dataset import SatelliteDataset
 from models import ValuationModel
 
